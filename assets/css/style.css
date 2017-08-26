@@ -1,0 +1,29 @@
+		body {
+			/* background pattern from Subtle Patterns */			
+			background-image: url("../images/green-dust.png");
+			padding: 2%;
+			color: #333;
+		}
+
+		h1 {
+			font-family: 'Berkshire Swash', cursive;
+			font-size: 600%;
+		}
+
+		h2 {
+			font-family: 'Righteous', cursive; 
+			font-size: 250%;
+		}
+
+		li {
+			font-family: 'Orbitron', sans-serif;
+			font-size: 200%;
+		}
+
+
+		/* 
+		Googe Fonts
+		font-family: 'Orbitron', sans-serif;
+		font-family: 'Berkshire Swash', cursive;
+		font-family: 'Righteous', cursive; 
+		*/
