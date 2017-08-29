@@ -9,26 +9,29 @@ var computerGuessed = computerGuess[Math.floor(Math.random() * computerGuess.len
 var computerLetter = function() {
 	this.nextLetterGuess = this.computerGuess[Math.floor(Math.random() * this.computerGuess.length)];
 }
-var userGuessesLeft = function() {
-	document.queryselector('#guessLeft').innerHTML = "Guesses left: " + guessLeft;
+
+var userGuessLeft = function() {
+	document.querySelector('#guessedLeft').innerHTML = "Guesses left: " + guessLeft;
 }
+
 var userGuessesSoFar = function() {
-	document.queryselector('#guessSoFar').innerHTML = "Your guesses so far: " + guessedLetter.join(', ');
+	document.querySelector('#guessSoFar').innerHTML = "Your guesses so far: " + guessedLetter.join(', ');
 }
+
 var reset = function() {
 	guessLeft = 9;
 	guessedLetter = [];
 	computerLetter();
-	userGuessesLeft();
+	userGuessLeft();
 	userGuessesSoFar();
 }
 computerLetter();
-userGuessesLeft();
+userGuessLeft();
 document.onkeyup = function(event) {
 	guessLeft--;
 	var userLetter = String.fromCharCode(event.keyCode).toLowerCase();
 	guessedLetter.push(userLetter);
-	userGuessesLeft();
+	userGuessLeft();
 	userGuessesSoFar();
 		if (guessLeft > 0){
 		  if (userLetter == nextLetterGuess){

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
+
 	<meta charset="UTF-8">
+
 	<title>Psychic Game</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
@@ -9,27 +11,76 @@
 	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-	<script type="text/javascript" src="assets/javascript/game.js"></script>
 
+<!-- 	<script type="text/javascript" src="game.js"></script>
+ -->
 </head>
 
 <body>
+	<h1>Psychic Game</h1><br>
 
-	<h1>Psychic Game</h1><br />
+	<hr><br>
 
-	<hr><br />
+	<h2>Guess what letter I'm thinking of ...</h2><br><br>
 
-	<h2>Guess what letter I'm thinking of ...</h2><br /><br />
+	<ul>
+		<li><p id="wins">Wins: </p></li><br>
+		<li><p id="losses">Losses: </p></li><br>
+		<li><p id="guessedLeft">Guesses left: </p></li><br>
+		<li><p id="guessSoFar">Your guesses so far: </p></li><br>
+	</ul>	
 
-	<div class="psychic game">
-		<ul class="list">
-			<li class="list-item"><p id="wins">Wins: </p></li><br />
-			<li class="list-item"><p id="losses">Losses: </p></li><br />
-			<li class="list-item"><p id="guessLeft">Guesses left: </p></li><br />
-			<li class="list-item"><p id="guessSoFar">Your guesses so far: </p></li><br />
-		</ul>	
-	</div>
+	<script type="text/javascript">
+		var computerGuess = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+		var wins = 0;
+		var losses = 0;
+		var guessLeft = 9;
+		var guessSoFar = 9;
+		var guessedLetter = [];
+		var nextLetterGuess = null;
+		var computerGuessed = computerGuess[Math.floor(Math.random() * computerGuess.length)];
+		var computerLetter = function() {
+			this.nextLetterGuess = this.computerGuess[Math.floor(Math.random() * this.computerGuess.length)];
+		}
 
+		var userGuessLeft = function() {
+			document.querySelector('#guessedLeft').innerHTML = "Guesses left: " + guessLeft;
+		}
+
+		var userGuessesSoFar = function() {
+			document.querySelector('#guessSoFar').innerHTML = "Your guesses so far: " + guessedLetter.join(', ');
+		}
+
+		var reset = function() {
+			guessLeft = 9;
+			guessedLetter = [];
+			computerLetter();
+			userGuessLeft();
+			userGuessesSoFar();
+		}
+		computerLetter();
+		userGuessLeft();
+		document.onkeyup = function(event) {
+			guessLeft--;
+			var userLetter = String.fromCharCode(event.keyCode).toLowerCase();
+			guessedLetter.push(userLetter);
+			userGuessLeft();
+			userGuessesSoFar();
+				if (guessLeft > 0){
+				  if (userLetter == nextLetterGuess){
+				      wins++;
+				      document.querySelector('#wins').innerHTML = "Wins: " + wins;
+				      reset();
+				    }
+				  }
+				  else if(guessLeft == 0){
+				    losses++;
+				    document.querySelector('#losses').innerHTML = "Losses: " + losses;
+					reset();
+				  }
+		}
+	</script>
+	
 </body>
 </html>
 
